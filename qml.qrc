@@ -1,6 +1,6 @@
 <RCC>
     <qresource prefix="/">
-        <file>qml/test-feature.qml</file>
         <file>qml/main.qml</file>
+        <file>qml/CustomButton.qml</file>
     </qresource>
 </RCC>

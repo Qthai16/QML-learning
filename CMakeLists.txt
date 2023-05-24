@@ -13,7 +13,9 @@ find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Core Widgets Quick)
 find_package(Qt5 REQUIRED COMPONENTS Core Widgets Quick)
 
 set(PROJECT_SOURCES
-        main.cpp
+    main.cpp
+    src/app.h
+    src/app.cpp
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
@@ -22,22 +24,22 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         ${PROJECT_SOURCES}
     )
 # Define target properties for Android with Qt 6 as:
-    set_property(TARGET QT-boilerplate APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
-                 ${CMAKE_CURRENT_SOURCE_DIR}/android)
+set_property(TARGET QT-boilerplate APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
+    ${CMAKE_CURRENT_SOURCE_DIR}/android)
 # For more information, see https://doc.qt.io/qt-6/qt-add-executable.html#target-creation
 else()
     if(ANDROID)
         add_library(QT-boilerplate SHARED
             ${PROJECT_SOURCES}
         )
-# Define properties for Android with Qt 5 after find_package() calls as:
+    # Define properties for Android with Qt 5 after find_package() calls as:
     set(ANDROID_PACKAGE_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/android")
-    else()
-        add_executable(QT-boilerplate
-            ${PROJECT_SOURCES}
-            qml.qrc
-        )
-    endif()
+else()
+    add_executable(QT-boilerplate
+        ${PROJECT_SOURCES}
+        qml.qrc
+    )
+endif()
 endif()
 
 target_compile_definitions(QT-boilerplate PRIVATE QT_QML_DEBUG)
