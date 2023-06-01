@@ -21,7 +21,6 @@ int main(int argc, char *argv[])
     myApp.setEngine(&engine);
     engine.rootContext()->setContextProperty("app", &myApp);
     engine.load(QUrl(QStringLiteral("qrc:/qml/main.qml")));
-//    engine.load(QUrl(qgetenv("MAIN_QML")));
     if (engine.rootObjects().isEmpty())
         return -1;
     return app.exec();

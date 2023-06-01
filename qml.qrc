@@ -8,5 +8,8 @@
         <file>res/checkmark.png</file>
         <file>res/partial-checkmark.png</file>
         <file>res/icons8-checkbox-40.png</file>
+        <file>qml/SampleListView.qml</file>
+        <file>qml/DragExample.qml</file>
+        <file>qml/FlickableContent.qml</file>
     </qresource>
 </RCC>

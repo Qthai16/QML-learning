@@ -5,30 +5,31 @@ Item {
     width: iRect.width
     height: iRect.height
     property alias buttonColor: iRect.color
-    property alias text: iText.displayText
+    property string displayText: ""
+    property int minWidth: 60
+    property int minHeight: 30
+    property var handleClicked: function() {}
 
     Rectangle {
         id: iRect;
         anchors.fill: parent
-        x: iRoot.x; y: iRoot.y;
-        width: 50; height: 50
+        width: iText.implicitWidth + 20 < minWidth ? minWidth : iText.implicitWidth + 20
+        height: iText.implicitHeight + 20 < minHeight ? minHeight : iText.implicitHeight + 20
         color: "red"
-        radius: 20
-    }
+        radius: 5
 
-    Text {
-        property string displayText: ""
-        id: iText
-        text: iText.displayText
-        color: "#000000"
-        anchors.centerIn: parent
-        font.pointSize: 10
-    }
+        Text {
+            id: iText
+            text: displayText
+            color: "#000000"
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.verticalCenter: parent.verticalCenter
+            font.pointSize: 10
+        }
 
-    MouseArea {
-        anchors.fill: parent
-        onClicked: {
-            console.log("button is clicked")
+        MouseArea {
+            anchors.fill: parent
+            onClicked: handleClicked()
         }
     }
 }
