@@ -23,13 +23,8 @@ ApplicationWindow {
     function onClickCreateListView() {
         var lViewComponent = Qt.createComponent("qrc:/qml/SampleListView.qml");
         if (lViewComponent.status === Component.Ready) {
-            var lViewObj = lViewComponent.createObject(iButtonContainer, {
-                                                      "parent": iButtonContainer,
-                                                      "anchors" : {
-                                                          "left": iButtonContainer.left,
-                                                          "top": iButtonContainer.bottom,
-                                                          "margins": 20
-                                                      }
+            var lViewObj = lViewComponent.createObject(iRectContainer, {
+                                                      "parent": iRectContainer
                                                   });
         }
 
@@ -37,6 +32,7 @@ ApplicationWindow {
 
     Row {
         id: iButtonContainer
+
         spacing: 10
         anchors {
             left: parent.left
@@ -70,6 +66,26 @@ ApplicationWindow {
             handleClicked: function() {
                 console.log("flickable")
             }
+        }
+    }
+
+    Rectangle {
+//        property var lView
+        id: iRectContainer
+        color: "#ffffff"
+        width: sampleViewId.implicitWidth + 50
+        height: sampleViewId.implicitHeight + 50
+        radius: 5
+        anchors {
+            left: iButtonContainer.left
+            top: iButtonContainer.bottom
+            topMargin: 20
+        }
+
+        SampleListView {
+            id: sampleViewId
+            height: listView.contentHeight
+            anchors.centerIn: parent.centerIn
         }
     }
 

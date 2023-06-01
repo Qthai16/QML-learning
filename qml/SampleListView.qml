@@ -1,11 +1,13 @@
 import QtQuick 2.11
+import QtQuick.Controls 2.5
 
 Item {
+    property alias listView: listViewId
     id: root
 
     ListView {
         id: listViewId
-        anchors.fill : parent
+        anchors.fill: parent
         model: mModelId
         highlight: Rectangle {
             width: 200
@@ -16,7 +18,6 @@ Item {
             radius: 5
             z: 5
         }
-
         delegate: delegateId
     }
 
