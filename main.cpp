@@ -3,6 +3,8 @@
 #include <QQmlContext>
 #include <QUrl>
 #include <QDebug>
+#include <QDir>
+#include <QIcon>
 
 #include "src/app.h"
 //#include <QApplication>
@@ -10,13 +12,13 @@
 
 int main(int argc, char *argv[])
 {
-    qInfo() << "this is a debug line";
+    qInfo() << "------------Start Qt application------------";
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     QGuiApplication app(argc, argv);
+    app.setWindowIcon(QIcon(":/res/newlogo.ico"));
     App myApp;
     QQmlApplicationEngine engine;
     myApp.setEngine(&engine);
-
     engine.rootContext()->setContextProperty("app", &myApp);
     engine.load(QUrl(QStringLiteral("qrc:/qml/main.qml")));
 //    engine.load(QUrl(qgetenv("MAIN_QML")));

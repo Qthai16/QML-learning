@@ -2,5 +2,11 @@
     <qresource prefix="/">
         <file>qml/main.qml</file>
         <file>qml/CustomButton.qml</file>
+        <file>res/OPSWAT.ico</file>
+        <file>res/newlogo.ico</file>
+        <file>qml/CustomCheckBox.qml</file>
+        <file>res/checkmark.png</file>
+        <file>res/partial-checkmark.png</file>
+        <file>res/icons8-checkbox-40.png</file>
     </qresource>
 </RCC>
