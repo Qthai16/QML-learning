@@ -1,6 +1,8 @@
 import QtQuick 2.11
 import QtQuick.Controls 2.5
 import QtQuick.Window 2.3
+
+import "../data/constant.js" as STR
 //import QtQml 2.12
 //import QtQuick.Controls 2.11
 
@@ -12,6 +14,8 @@ ApplicationWindow {
     color: "#c5c7c9"
     title: qsTr("QTQuick Introduction")
 
+    property var currentDemo
+
     Shortcut {
         sequence: "F5"
         onActivated: {
@@ -21,10 +25,12 @@ ApplicationWindow {
     }
 
     function onClickCreateListView() {
-        var lViewComponent = Qt.createComponent("qrc:/qml/SampleListView.qml");
+//        var lViewComponent = Qt.createComponent("qrc:/qml/SampleListView.qml");
+//        console.log("path: "+STR.SAMPLE_LISTVIEW_FILE.arg(app.qmlPath()));
+        var lViewComponent = Qt.createComponent(STR.SAMPLE_LISTVIEW_FILE.arg(app.qmlPath()));
         if (lViewComponent.status === Component.Ready) {
-            var lViewObj = lViewComponent.createObject(iRectContainer, {
-                                                      "parent": iRectContainer
+            window.currentDemo = lViewComponent.createObject(iShowRect, {
+                                                      "parent": iShowRect,
                                                   });
         }
 
@@ -46,7 +52,6 @@ ApplicationWindow {
             buttonColor: "yellow"
             handleClicked: function() {
                 onClickCreateListView()
-//                console.log("list view")
             }
         }
 
@@ -69,23 +74,44 @@ ApplicationWindow {
         }
     }
 
-    Rectangle {
-//        property var lView
-        id: iRectContainer
-        color: "#ffffff"
-        width: sampleViewId.implicitWidth + 50
-        height: sampleViewId.implicitHeight + 50
-        radius: 5
+    CustomButton {
+        id: iButton4
+        displayText: "Remove demo"
+        buttonColor: "dodgerblue"
         anchors {
-            left: iButtonContainer.left
-            top: iButtonContainer.bottom
-            topMargin: 20
+            top: parent.top
+            right: parent.right
+            topMargin: 10
+            rightMargin: 20
         }
 
-        SampleListView {
-            id: sampleViewId
-            height: listView.contentHeight
-            anchors.centerIn: parent.centerIn
+        handleClicked: function() {
+            if (currentDemo !== null) {
+                currentDemo.destroy();
+            }
+        }
+    }
+
+    Item {
+        id: iShowRect
+        anchors {
+            fill: parent
+//            right: parent.right
+//            left : iButtonContainer.left
+//            top: iButtonContainer.bottom
+//            bottom: parent.bottom
+            topMargin: 55
+            leftMargin: 10
+            rightMargin: 10
+            bottomMargin: 10
+        }
+        signal closeDemo
+
+        Rectangle {
+            id: iRectContainer
+            color: "#ffffff"
+            radius: 5
+            anchors.fill: parent
         }
     }
 

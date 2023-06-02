@@ -11,6 +11,7 @@ public:
     ~App();
 
     Q_INVOKABLE void loadQml();
+    Q_INVOKABLE QString qmlPath();
     void setEngine(QQmlApplicationEngine *engine) { m_engine = engine; }
 
 private:

@@ -3,14 +3,28 @@ import QtQuick.Controls 2.5
 
 Item {
     property alias listView: listViewId
+    property int itemHeight: 30
+    property int itemWidth: 200
     id: root
+//    width: parent.width
+//    height: parent.height
+//    height: mModelId.count*itemHeight
+//    width: itemWidth
+    anchors.fill: parent
+
+//    Component.onCompleted: {
+//        console.log("component width: "+ root.width + ", height: " +root.height);
+//        console.log("listview width: "+ listViewId.width + ", height: " +listViewId.height);
+//    }
 
     ListView {
         id: listViewId
-        anchors.fill: parent
+//        anchors.fill: parent
+        height: mModelId.count*itemHeight
+        width: itemWidth
         model: mModelId
         highlight: Rectangle {
-            width: 200
+            width: itemWidth
             color: "#027199"
             opacity: 0.5
             border.color: "#000000"
@@ -19,6 +33,7 @@ Item {
             z: 5
         }
         delegate: delegateId
+        clip: true
     }
 
     Component {
@@ -26,8 +41,8 @@ Item {
         Rectangle {
             id: rectId
             color: "#6bd3ff"
-            width: 200
-            height: 30
+            width: itemWidth
+            height: itemHeight
             radius: 5
             border.color: "#000000"
 
@@ -69,4 +84,13 @@ Item {
         }
     }
 
+//    Connections {
+//        id: parentConnection
+
+//        function oncloseDemo() {
+//            root.destroy()
+//        }
+
+//        target: root.parent
+//    }
 }

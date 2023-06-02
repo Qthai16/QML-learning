@@ -11,5 +11,6 @@
         <file>qml/SampleListView.qml</file>
         <file>qml/DragExample.qml</file>
         <file>qml/FlickableContent.qml</file>
+        <file>data/constant.js</file>
     </qresource>
 </RCC>
