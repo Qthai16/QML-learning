@@ -1,6 +1,7 @@
 import QtQuick 2.11
 import QtQuick.Controls 2.5
 import QtQuick.Window 2.3
+import QtQuick.Layouts 1.3
 
 import "../data/constant.js" as STR
 //import QtQml 2.12
@@ -14,7 +15,7 @@ ApplicationWindow {
     color: "#c5c7c9"
     title: qsTr("QTQuick Introduction")
 
-    property var currentDemo
+    property var currentDemos: []
 
     Shortcut {
         sequence: "F5"
@@ -29,9 +30,10 @@ ApplicationWindow {
 //        console.log("path: "+STR.SAMPLE_LISTVIEW_FILE.arg(app.qmlPath()));
         var lViewComponent = Qt.createComponent(STR.SAMPLE_LISTVIEW_FILE.arg(app.qmlPath()));
         if (lViewComponent.status === Component.Ready) {
-            window.currentDemo = lViewComponent.createObject(iShowRect, {
-                                                      "parent": iShowRect,
+            let demoInstance = lViewComponent.createObject(igridShow, {
+                                                      "parent": igridShow,
                                                   });
+            window.currentDemos.push(demoInstance);
         }
 
     }
@@ -66,10 +68,10 @@ ApplicationWindow {
 
         CustomButton {
             id: iButton3
-            displayText: "Flickable"
+            displayText: "Flickable content"
             buttonColor: "cyan"
             handleClicked: function() {
-                console.log("flickable")
+//                console.log("flickable")
             }
         }
     }
@@ -86,9 +88,7 @@ ApplicationWindow {
         }
 
         handleClicked: function() {
-            if (currentDemo !== null) {
-                currentDemo.destroy();
-            }
+            igridShow.closeDemo()
         }
     }
 
@@ -105,13 +105,21 @@ ApplicationWindow {
             rightMargin: 10
             bottomMargin: 10
         }
-        signal closeDemo
 
         Rectangle {
             id: iRectContainer
             color: "#ffffff"
             radius: 5
             anchors.fill: parent
+
+            GridLayout {
+                id: igridShow
+                signal closeDemo
+
+                columnSpacing: 10
+                rowSpacing: 10
+                columns: 2
+            }
         }
     }
 

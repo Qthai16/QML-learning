@@ -12,5 +12,7 @@
         <file>qml/DragExample.qml</file>
         <file>qml/FlickableContent.qml</file>
         <file>data/constant.js</file>
+        <file>core/json-list-model/JSONListModel.qml</file>
+        <file>core/json-list-model/jsonpath.js</file>
     </qresource>
 </RCC>

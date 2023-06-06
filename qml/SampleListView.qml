@@ -1,28 +1,35 @@
 import QtQuick 2.11
 import QtQuick.Controls 2.5
 
+import "../core/json-list-model"
+
 Item {
     property alias listView: listViewId
     property int itemHeight: 30
-    property int itemWidth: 200
+    property int itemWidth: 400
     id: root
-//    width: parent.width
-//    height: parent.height
+    width: listViewId.width
+    height: listViewId.height
 //    height: mModelId.count*itemHeight
 //    width: itemWidth
-    anchors.fill: parent
+//    anchors.fill: parent
 
 //    Component.onCompleted: {
 //        console.log("component width: "+ root.width + ", height: " +root.height);
 //        console.log("listview width: "+ listViewId.width + ", height: " +listViewId.height);
 //    }
 
+    onItemHeightChanged: {
+        console.log("item height changed: " + itemHeight)
+    }
+
     ListView {
         id: listViewId
 //        anchors.fill: parent
         height: mModelId.count*itemHeight
         width: itemWidth
-        model: mModelId
+//        model: mModelId
+        model: mJsonModel.model
         highlight: Rectangle {
             width: itemWidth
             color: "#027199"
@@ -51,7 +58,8 @@ Item {
                 anchors.topMargin: 5
                 anchors.horizontalCenter: parent.horizontalCenter
                 id: textId
-                text: country + ": " + capital
+//                text: country + ": " + capital
+                text: category + ": " + author + ": " + title + ": " + price
                 font.pointSize: 10
             }
 
@@ -84,13 +92,23 @@ Item {
         }
     }
 
-//    Connections {
-//        id: parentConnection
+    JSONListModel {
+        id: mJsonModel
+        source: "{\"store\":{\"book\":[{\"category\":\"reference\",\"author\":\"Nigel Rees\",\"title\":\"Sayings of the Century\",\"price\":8.95},{\"category\":\"fiction\",\"author\":\"Evelyn Waugh\",\"title\":\"Sword of Honour\",\"price\":12.99},{\"category\":\"fiction\",\"author\":\"Herman Melville\",\"title\":\"Moby Dick\",\"isbn\":\"0-553-21311-3\",\"price\":8.99},{\"category\":\"fiction\",\"author\":\"J. R. R. Tolkien\",\"title\":\"The Lord of the Rings\",\"isbn\":\"0-395-19395-8\",\"price\":22.99}],\"bicycle\":{\"color\":\"red\",\"price\":19.95}}}"
+        query: "$.store.book[*]"
+//        query: "$.store.bicycle[*]"
+//        onSourceChanged: {
 
-//        function oncloseDemo() {
-//            root.destroy()
 //        }
+    }
 
-//        target: root.parent
-//    }
+    Connections {
+        id: destroyConnection
+
+        function onCloseDemo() {
+            root.destroy()
+        }
+
+        target: root.parent
+    }
 }

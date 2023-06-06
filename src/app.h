@@ -1,6 +1,7 @@
 #ifndef APP_H
 #define APP_H
 #include <QObject>
+#include <QtDebug>
 #include <QQmlApplicationEngine>
 
 class App : public QObject
