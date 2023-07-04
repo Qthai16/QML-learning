@@ -88,7 +88,12 @@ ApplicationWindow {
         }
 
         handleClicked: function() {
-            igridShow.closeDemo()
+//            igridShow.closeDemo()
+            for (const element of currentDemos) {
+                element.closeDemo()
+            }
+            window.currentDemos = []
+//            window.currentDemos.forEach(function(element){element.closeDemo()})
         }
     }
 

@@ -7,6 +7,7 @@ Item {
     property alias listView: listViewId
     property int itemHeight: 30
     property int itemWidth: 400
+    signal closeDemo
     id: root
     width: listViewId.width
     height: listViewId.height
@@ -109,6 +110,7 @@ Item {
             root.destroy()
         }
 
-        target: root.parent
+//        target: root.parent
+        target: root
     }
 }
