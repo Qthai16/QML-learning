@@ -25,6 +25,11 @@ ApplicationWindow {
         }
     }
 
+    TrayIcon {
+        iconSource: "qrc:/res/penguin-linux.png"
+        shouldVisible: true
+    }
+
     function onClickCreateListView() {
 //        var lViewComponent = Qt.createComponent("qrc:/qml/SampleListView.qml");
 //        console.log("path: "+STR.SAMPLE_LISTVIEW_FILE.arg(app.qmlPath()));

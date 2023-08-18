@@ -13,9 +13,11 @@ find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Core Widgets Quick)
 find_package(Qt5 REQUIRED COMPONENTS Core Widgets Quick)
 
 set(PROJECT_SOURCES
-    main.cpp
     src/app.h
+    src/trayicon.h
+    main.cpp
     src/app.cpp
+    src/trayicon.cpp
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)

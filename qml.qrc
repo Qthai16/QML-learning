@@ -14,5 +14,8 @@
         <file>data/constant.js</file>
         <file>core/json-list-model/JSONListModel.qml</file>
         <file>core/json-list-model/jsonpath.js</file>
+        <file>qml/TrayIcon.qml</file>
+        <file>res/penguin-linux.png</file>
+        <file>res/penguin-linux_64x64.ico</file>
     </qresource>
 </RCC>
